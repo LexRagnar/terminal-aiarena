@@ -152,7 +152,7 @@ const styles = {
   },
   terminalHeader: {
     backgroundColor: '#000',
-    padding: '10px 20px',
+    padding: '20px 30px',
     borderTopLeftRadius: '10px',
     borderTopRightRadius: '10px',
     display: 'flex',
@@ -201,7 +201,7 @@ const styles = {
     lineHeight: 1.5,
     color: isEntity1 ? '#5F4B86' : '#EA830D', // Cores invertidas
     textShadow: isEntity1 
-      ? '0 0 10px rgba(95, 75, 134, 0.4)' 
+      ? '0 0 10px rgba(145, 114, 204, 0.9)' 
       : '0 0 10px rgba(234, 131, 13, 0.4)',
     fontFamily: '"Courier New", monospace',
     whiteSpace: 'pre-wrap',
@@ -245,7 +245,7 @@ const MatrixBackground = () => {
       });
     }
     
-    const matrixInterval = setInterval(matrix, 100);
+    const matrixInterval = setInterval(matrix, 45);
     
     return () => {
       clearInterval(matrixInterval);
@@ -261,7 +261,7 @@ const MatrixBackground = () => {
         left: 0, 
         width: '100%', 
         height: '100%',
-        opacity: 0.15
+        opacity: 0.12
       }} 
     />
   );
