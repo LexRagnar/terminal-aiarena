@@ -1,3 +1,5 @@
+/* Arquivo App.css existente */
+
 /* Animação de fade-in para os caracteres: branco para a cor da entidade */
 @keyframes textFadeIn {
   0% {
@@ -98,4 +100,162 @@ canvas {
 textarea:focus {
   outline: 2px solid #666;
   box-shadow: 0 0 8px rgba(100, 100, 100, 0.5);
+}
+
+/* NOVOS ESTILOS PARA CONTROLES DE VOZ */
+
+/* Estilização dos sliders de voz */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: #333;
+  border-radius: 5px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #5F4B86;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(95, 75, 134, 0.7);
+  transition: 0.2s;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(95, 75, 134, 0.9);
+}
+
+/* Botão de teste de voz com efeito de pulso quando ativo */
+.voice-test-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-test-button:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: pulse 0.8s ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Visualizador de áudio (simulado com efeitos CSS) */
+.audio-visualizer {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  margin: 10px 0;
+  justify-content: center;
+}
+
+.audio-bar {
+  width: 3px;
+  height: 100%;
+  background-color: #5F4B86;
+  margin: 0 2px;
+  border-radius: 2px;
+  animation: none;
+}
+
+.speaking-entity1 .audio-bar {
+  background-color: #5F4B86;
+  animation: sound-wave 0.5s infinite alternate;
+}
+
+.speaking-entity2 .audio-bar {
+  background-color: #EA830D;
+  animation: sound-wave 0.5s infinite alternate;
+}
+
+@keyframes sound-wave {
+  0% {
+    height: 20%;
+    opacity: 0.7;
+  }
+  50% {
+    height: 70%;
+    opacity: 0.9;
+  }
+  100% {
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+/* Efeito visual para o botão de mudo */
+.mute-button {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.muted .mute-button {
+  background-color: #444 !important;
+  color: #888 !important;
+}
+
+.mute-button::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: red;
+  transform: rotate(45deg);
+  top: 48%;
+  left: 10%;
+  right: 10%;
+  transition: width 0.3s ease;
+}
+
+.muted .mute-button::after {
+  width: 80%;
+}
+
+/* Indicador de voz ativa durante a narração */
+.voice-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.voice-active {
+  background-color: #0f0;
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+  animation: pulse-glow 1.5s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.5;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(0, 255, 0, 0.9);
+  }
 }

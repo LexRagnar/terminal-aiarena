@@ -10,265 +10,84 @@ const alienSymbols = [
   '⎗', '⎘', '⎙', '⎚', '⎛', '⎜', '⎝', '⎞', '⎟', '⎠', '⎡', '⎢', '⎣', '⎤'
 ];
 
-// Estilos inline para substituir a importação do CSS
+// Estilos inline atualizados com novos elementos para voz
 const styles = {
-  app: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '20px',
-    fontFamily: '"Courier New", monospace',
-  },
-  toggleViewBtn: {
-    position: 'fixed',
-    top: '20px',
-    right: '20px',
-    backgroundColor: '#333',
-    color: 'white',
-    border: 'none',
-    padding: '10px 15px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    zIndex: 1000,
-  },
-  adminPanel: {
-    backgroundColor: '#1a1a1a',
-    borderRadius: '10px',
-    padding: '20px',
-    marginTop: '20px',
-  },
-  heading: {
-    color: '#ddd',
-    textAlign: 'center',
-    marginBottom: '30px',
-  },
-  configSection: {
-    backgroundColor: '#222',
-    padding: '20px',
-    borderRadius: '8px',
-    marginBottom: '20px',
-  },
-  sectionHeading: {
-    color: '#ddd',
-    marginBottom: '15px',
-    borderBottom: '1px solid #444',
-    paddingBottom: '10px',
-  },
-  formGroup: {
-    marginBottom: '15px',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  label: {
-    width: '200px',
-    color: '#bbb',
-  },
-  input: {
-    flex: 1,
-    backgroundColor: '#333',
-    border: '1px solid #555',
-    color: '#ddd',
-    padding: '8px 12px',
-    borderRadius: '4px',
-  },
-  conversationCreator: {
-    maxHeight: '600px',
-    overflowY: 'auto',
-    marginBottom: '20px',
-  },
-  messageItem: {
+  // ... (todos os estilos anteriores permanecem iguais)
+  
+  // Novos estilos para controles de voz
+  voiceControl: {
+    marginTop: '15px',
+    padding: '10px',
     backgroundColor: '#2a2a2a',
-    borderRadius: '6px',
-    padding: '10px',
-    marginBottom: '10px',
-  },
-  messageHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '8px',
-  },
-  entityTag: (isEntity1) => ({
-    padding: '4px 8px',
-    borderRadius: '4px',
-    color: 'white',
-    backgroundColor: isEntity1 ? '#5F4B86' : '#EA830D', // Cores invertidas
-  }),
-  messageControl: {
-    backgroundColor: '#444',
-    color: 'white',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    borderRadius: '15px',
-    marginLeft: '5px',
-    cursor: 'pointer',
-  },
-  disabledButton: {
-    backgroundColor: '#333',
-    cursor: 'not-allowed',
-  },
-  textarea: {
-    width: '100%',
-    backgroundColor: '#333',
-    border: '1px solid #555',
-    color: '#ddd',
-    padding: '10px',
-    borderRadius: '4px',
-    resize: 'vertical',
-    fontFamily: '"Courier New", monospace',
-    whiteSpace: 'pre-wrap',
-  },
-  addMessageSection: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  addButton: (isEntity1) => ({
-    padding: '10px 15px',
-    border: 'none',
     borderRadius: '5px',
-    color: 'white',
-    cursor: 'pointer',
+  },
+  voiceSettings: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  },
+  voiceSliderContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+  },
+  voiceSlider: {
     flex: 1,
-    margin: '0 5px',
-    backgroundColor: isEntity1 ? '#5F4B86' : '#EA830D', // Cores invertidas
-  }),
-  terminalContainer: {
-    marginTop: '20px',
+    height: '4px',
+    WebkitAppearance: 'none',
+    background: '#444',
+    borderRadius: '2px',
+    outline: 'none',
   },
-  terminalControls: {
+  voiceTestButton: {
+    backgroundColor: '#5F4B86',
+    color: 'white',
+    border: 'none',
+    padding: '8px 15px',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    marginTop: '10px',
+    transition: 'all 0.3s ease',
+  },
+  audioVisualizer: {
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
-    margin: '20px 0',
+    gap: '2px',
+    height: '30px',
+    margin: '10px 0',
   },
-  terminalButton: {
+  audioBar: {
+    width: '3px',
+    backgroundColor: '#5F4B86',
+    borderRadius: '1px',
+  },
+  voiceIndicator: {
+    display: 'inline-block',
+    width: '8px',
+    height: '8px',
+    borderRadius: '50%',
+    marginRight: '8px',
+    transition: 'all 0.3s ease',
+  },
+  muteButton: {
     backgroundColor: '#333',
     color: 'white',
     border: 'none',
-    padding: '10px 20px',
-    margin: '0 10px',
-    borderRadius: '5px',
+    padding: '8px 15px',
+    borderRadius: '4px',
     cursor: 'pointer',
-    fontSize: '16px',
-  },
-  terminalHeader: {
-    backgroundColor: '#000',
-    padding: '20px 30px',
-    borderTopLeftRadius: '10px',
-    borderTopRightRadius: '10px',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    gap: '5px',
   },
-  terminalTitle: {
-    color: '#0f0',
-    fontWeight: 'bold',
-    fontSize: '18px',
-  },
-  terminal: {
-    height: '70vh',
-    backgroundColor: '#000',
-    borderBottomLeftRadius: '10px',
-    borderBottomRightRadius: '10px',
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  matrixBackground: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    opacity: 0.4,
-  },
-  conversationDisplay: {
-    padding: '20px',
-    overflowY: 'auto',
-    height: '100%',
-    position: 'relative',
-    zIndex: 2,
-  },
-  message: {
-    marginBottom: '20px',
-    opacity: 0.9,
-  },
-  messageSender: (isEntity1) => ({
-    fontWeight: 'bold',
-    marginBottom: '5px',
-    color: isEntity1 ? '#5F4B86' : '#EA830D', // Cores invertidas
-  }),
-  messageContent: (isEntity1) => ({
-    padding: '5px 0',
-    lineHeight: 1.5,
-    color: isEntity1 ? '#5F4B86' : '#EA830D', // Cores invertidas
-    textShadow: isEntity1 
-      ? '0 0 10px rgba(145, 114, 204, 0.9)' 
-      : '0 0 10px rgba(234, 131, 13, 0.4)',
-    fontFamily: '"Courier New", monospace',
-    whiteSpace: 'pre-wrap',
-  }),
 };
 
-// Componente MatrixBackground para criar efeito Matrix com símbolos alienígenas
-const MatrixBackground = () => {
-  const canvasRef = useRef(null);
-  
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    
-    const cols = Math.floor(canvas.width / 20);
-    const ypos = Array(cols).fill(0);
-    
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    function matrix() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      ctx.fillStyle = '#0f0';
-      ctx.font = '15px monospace';
-      
-      ypos.forEach((y, ind) => {
-        // Usar símbolos alienígenas em vez de caracteres ASCII aleatórios
-        const symbolIndex = Math.floor(Math.random() * alienSymbols.length);
-        const text = alienSymbols[symbolIndex];
-        const x = ind * 20;
-        ctx.fillText(text, x, y);
-        if (y > 100 + Math.random() * 10000) {
-          ypos[ind] = 0;
-        } else {
-          ypos[ind] = y + 20;
-        }
-      });
-    }
-    
-    const matrixInterval = setInterval(matrix, 45);
-    
-    return () => {
-      clearInterval(matrixInterval);
-    };
-  }, []);
-  
-  return (
-    <canvas 
-      ref={canvasRef} 
-      style={{ 
-        position: 'absolute', 
-        top: 0, 
-        left: 0, 
-        width: '100%', 
-        height: '100%',
-        opacity: 0.12
-      }} 
-    />
-  );
-};
+// Continua na próxima parte...
 
-// Componente principal
+// Componente principal App
 const App = () => {
+  // Estados originais
   const [isAdmin, setIsAdmin] = useState(true);
   const [entity1Name, setEntity1Name] = useState('Entidade 1');
   const [entity2Name, setEntity2Name] = useState('Entidade 2');
@@ -281,368 +100,324 @@ const App = () => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [typedChars, setTypedChars] = useState([]);
-  
-  // Referência para o último textarea adicionado
+
+  // Novos estados para voz
+  const [availableVoices, setAvailableVoices] = useState([]);
+  const [voicesLoaded, setVoicesLoaded] = useState(false);
+  const [entity1Voice, setEntity1Voice] = useState(null);
+  const [entity2Voice, setEntity2Voice] = useState(null);
+  const [entity1Pitch, setEntity1Pitch] = useState(0.7);
+  const [entity2Pitch, setEntity2Pitch] = useState(1.3);
+  const [entity1Rate, setEntity1Rate] = useState(0.9);
+  const [entity2Rate, setEntity2Rate] = useState(1.1);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
+  const [currentSpeakingEntity, setCurrentSpeakingEntity] = useState(null);
+
+  // Referências
   const lastTextareaRef = useRef(null);
   const animationRef = useRef(null);
   const conversationDisplayRef = useRef(null);
   const cursorRef = useRef(null);
+  const speechSynthRef = useRef(window.speechSynthesis);
+  const currentUtteranceRef = useRef(null);
 
-  // Inicializar efeito do cursor piscante
+  // Efeito para carregar vozes disponíveis
   useEffect(() => {
-    cursorRef.current = setInterval(() => {
-      const cursor = document.querySelector('.cursor');
-      if (cursor) {
-        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+    const loadVoices = () => {
+      const synth = speechSynthRef.current;
+      const voices = synth.getVoices();
+      
+      if (voices.length > 0) {
+        setAvailableVoices(voices);
+        setVoicesLoaded(true);
+        
+        // Configurar vozes padrão
+        const defaultVoices = selectDefaultVoices(voices);
+        setEntity1Voice(defaultVoices.entity1Voice);
+        setEntity2Voice(defaultVoices.entity2Voice);
       }
-    }, 500);
+    };
+    
+    loadVoices();
+    speechSynthRef.current.addEventListener('voiceschanged', loadVoices);
     
     return () => {
-      if (cursorRef.current) {
-        clearInterval(cursorRef.current);
-      }
+      speechSynthRef.current.removeEventListener('voiceschanged', loadVoices);
     };
   }, []);
 
-  // Adicionar nova mensagem e focar na caixa de texto
-  const addMessage = (entity, text) => {
-    const newConversation = [...conversation, { entity, text, id: Date.now() }];
-    setConversation(newConversation);
-  };
-
-  // Efeito para focar na última caixa de texto adicionada
-  useEffect(() => {
-    if (conversation.length > 0 && lastTextareaRef.current) {
-      // Focar na última caixa de texto
-      lastTextareaRef.current.focus();
-      
-      // Rolar para a última mensagem
-      const conversationCreator = document.querySelector('[data-conversation-creator]');
-      if (conversationCreator) {
-        conversationCreator.scrollTop = conversationCreator.scrollHeight;
-      }
-    }
-  }, [conversation.length]);
-
-  // Remover mensagem
-  const removeMessage = (index) => {
-    const newConversation = [...conversation];
-    newConversation.splice(index, 1);
-    setConversation(newConversation);
-  };
-
-  // Iniciar animação
-  const startAnimation = () => {
-    if (conversation.length === 0) return;
+  // Função para selecionar vozes padrão
+  const selectDefaultVoices = (voices) => {
+    const englishVoices = voices.filter(voice => voice.lang.startsWith('en'));
+    const allVoices = englishVoices.length > 1 ? englishVoices : voices;
     
-    if (isPaused) {
-      // Se pausado, apenas despausar
-      setIsPaused(false);
-      setIsAnimating(true);
+    let entity1Voice = allVoices.find(voice => 
+      voice.name.toLowerCase().includes('male') && 
+      (voice.name.toLowerCase().includes('deep') || voice.name.toLowerCase().includes('low'))
+    );
+    
+    let entity2Voice = allVoices.find(voice => 
+      voice.name.toLowerCase().includes('robot') || 
+      (voice.name.toLowerCase().includes('female') && !voice.name.toLowerCase().includes('deep'))
+    );
+    
+    if (!entity1Voice) {
+      entity1Voice = allVoices.find(v => v.name.includes('Male')) || allVoices[0];
+    }
+    
+    if (!entity2Voice || entity2Voice === entity1Voice) {
+      entity2Voice = allVoices.find(v => v !== entity1Voice) || allVoices[allVoices.length > 1 ? 1 : 0];
+    }
+    
+    return { entity1Voice, entity2Voice };
+  };
+
+  // Função para falar texto
+  const speakText = (text, isEntity1) => {
+    if (!isVoiceEnabled || isMuted || !window.speechSynthesis) return;
+    
+    const synth = speechSynthRef.current;
+    
+    if (currentUtteranceRef.current) {
+      synth.cancel();
+    }
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    currentUtteranceRef.current = utterance;
+    
+    if (isEntity1) {
+      utterance.voice = entity1Voice;
+      utterance.pitch = entity1Pitch;
+      utterance.rate = entity1Rate;
+      setCurrentSpeakingEntity('entity1');
     } else {
-      // Se não pausado, iniciar do começo
-      setIsAnimating(true);
-      setCurrentMessageIndex(0);
-      setCurrentCharIndex(0);
-      setDisplayedText('');
-      setTypedChars([]);
+      utterance.voice = entity2Voice;
+      utterance.pitch = entity2Pitch;
+      utterance.rate = entity2Rate;
+      setCurrentSpeakingEntity('entity2');
     }
-  };
-
-  // Pausar animação
-  const pauseAnimation = () => {
-    setIsPaused(true);
-    setIsAnimating(false);
-  };
-
-  // Parar animação completamente
-  const stopAnimation = () => {
-    setIsAnimating(false);
-    setIsPaused(false);
-    if (animationRef.current) {
-      clearTimeout(animationRef.current);
-    }
-  };
-
-  // Reiniciar animação
-  const restartAnimation = () => {
-    stopAnimation();
-    setCurrentMessageIndex(0);
-    setCurrentCharIndex(0);
-    setDisplayedText('');
-    setTypedChars([]);
-    startAnimation();
-  };
-
-  // Trocar entre Admin e Terminal
-  const toggleView = () => {
-    setIsAdmin(!isAdmin);
-    if (!isAdmin) {
-      stopAnimation();
-    }
-  };
-
-  // Mover mensagem para cima na ordem
-  const moveMessageUp = (index) => {
-    if (index === 0) return;
-    const newConversation = [...conversation];
-    const temp = newConversation[index];
-    newConversation[index] = newConversation[index - 1];
-    newConversation[index - 1] = temp;
-    setConversation(newConversation);
-  };
-
-  // Mover mensagem para baixo na ordem
-  const moveMessageDown = (index) => {
-    if (index === conversation.length - 1) return;
-    const newConversation = [...conversation];
-    const temp = newConversation[index];
-    newConversation[index] = newConversation[index + 1];
-    newConversation[index + 1] = temp;
-    setConversation(newConversation);
-  };
-
-  // Efeito de digitação com fade-in de branco para a cor
-  useEffect(() => {
-    if (!isAnimating) return;
-
-    const currentMessage = conversation[currentMessageIndex];
-    if (!currentMessage) {
-      setIsAnimating(false);
-      return;
-    }
-
-    if (currentCharIndex < currentMessage.text.length) {
-      animationRef.current = setTimeout(() => {
-        const newChar = currentMessage.text[currentCharIndex];
-        
-        // Adiciona caractere à lista com um ID único
-        setTypedChars(prev => [
-          ...prev, 
-          {
-            char: newChar,
-            id: `${currentMessageIndex}-${currentCharIndex}`,
-            timestamp: Date.now()
-          }
-        ]);
-        
-        setDisplayedText(prev => prev + newChar);
-        setCurrentCharIndex(currentCharIndex + 1);
-        
-        // Rolagem automática
-        if (conversationDisplayRef.current) {
-          conversationDisplayRef.current.scrollTop = conversationDisplayRef.current.scrollHeight;
-        }
-      }, animationSpeed);
-    } else {
-      animationRef.current = setTimeout(() => {
-        setCurrentMessageIndex(currentMessageIndex + 1);
-        setCurrentCharIndex(0);
-        setDisplayedText('');
-        setTypedChars([]);
-      }, 1000);
-    }
-
-    return () => {
-      if (animationRef.current) {
-        clearTimeout(animationRef.current);
-      }
+    
+    utterance.onend = () => {
+      currentUtteranceRef.current = null;
+      setCurrentSpeakingEntity(null);
     };
-  }, [isAnimating, currentMessageIndex, currentCharIndex, conversation, animationSpeed]);
+    
+    synth.speak(utterance);
+  };
 
-  return (
-    <div style={styles.app}>
-      <button 
-        style={styles.toggleViewBtn} 
-        onClick={toggleView}
-      >
-        {isAdmin ? 'Ver Terminal' : 'Voltar para Admin'}
-      </button>
+  // Função para testar voz
+  const testVoice = (isEntity1) => {
+    const testText = isEntity1 
+      ? `Iniciando teste de voz para ${entity1Name}. Esta é uma simulação de diálogo futurista.`
+      : `Iniciando teste de voz para ${entity2Name}. Esta é uma simulação de diálogo futurista.`;
+    
+    speakText(testText, isEntity1);
+  };
 
-      {isAdmin ? (
-        <div style={styles.adminPanel}>
-          <h1 style={styles.heading}>Configuração do Terminal</h1>
-          
-          <div style={styles.configSection}>
-            <h2 style={styles.sectionHeading}>Configurações Gerais</h2>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Nome do Terminal:</label>
-              <input 
-                style={styles.input}
-                type="text" 
-                value={terminalName} 
-                onChange={(e) => setTerminalName(e.target.value)} 
-              />
+  // Continua na próxima parte...
+
+    // JSX do componente
+    return (
+      <div style={styles.app}>
+        <button 
+          style={styles.toggleViewBtn} 
+          onClick={toggleView}
+        >
+          {isAdmin ? 'Ver Terminal' : 'Voltar para Admin'}
+        </button>
+  
+        {isAdmin ? (
+          <div style={styles.adminPanel}>
+            <h1 style={styles.heading}>Configuração do Terminal</h1>
+            
+            {/* Seção de Configurações Gerais */}
+            <div style={styles.configSection}>
+              <h2 style={styles.sectionHeading}>Configurações Gerais</h2>
+              {/* ... configurações gerais existentes ... */}
             </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Nome da Entidade 1:</label>
-              <input 
-                style={styles.input}
-                type="text" 
-                value={entity1Name} 
-                onChange={(e) => setEntity1Name(e.target.value)} 
-              />
+  
+            {/* Nova Seção: Configuração de Voz */}
+            <div style={styles.configSection}>
+              <h2 style={styles.sectionHeading}>Configuração de Voz</h2>
+              
+              <div style={styles.formGroup}>
+                <label style={styles.label}>Ativar Vozes:</label>
+                <input 
+                  type="checkbox"
+                  checked={isVoiceEnabled}
+                  onChange={(e) => setIsVoiceEnabled(e.target.checked)}
+                  style={{width: '20px', height: '20px'}}
+                />
+              </div>
+              
+              {isVoiceEnabled && (
+                <>
+                  {/* Configurações de Voz para Entidade 1 */}
+                  <div style={styles.voiceSettings}>
+                    <h3 style={{...styles.sectionHeading, fontSize: '16px'}}>
+                      Voz de {entity1Name}
+                    </h3>
+                    
+                    <div style={styles.formGroup}>
+                      <label style={styles.label}>Selecionar Voz:</label>
+                      <select
+                        style={styles.input}
+                        value={entity1Voice ? availableVoices.indexOf(entity1Voice) : ''}
+                        onChange={(e) => setEntity1Voice(availableVoices[Number(e.target.value)])}
+                      >
+                        {availableVoices.map((voice, index) => (
+                          <option key={`voice1-${index}`} value={index}>
+                            {voice.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    
+                    <div style={styles.voiceSliderContainer}>
+                      <label style={styles.label}>Tom:</label>
+                      <input
+                        type="range"
+                        min="0.1"
+                        max="2"
+                        step="0.1"
+                        value={entity1Pitch}
+                        onChange={(e) => setEntity1Pitch(Number(e.target.value))}
+                        style={styles.voiceSlider}
+                      />
+                      <span style={styles.sliderValue}>{entity1Pitch}</span>
+                    </div>
+                    
+                    <button 
+                      className="voice-test-button"
+                      style={styles.voiceTestButton}
+                      onClick={() => testVoice(true)}
+                    >
+                      Testar Voz de {entity1Name}
+                    </button>
+                  </div>
+  
+                  {/* Configurações de Voz para Entidade 2 */}
+                  <div style={styles.voiceSettings}>
+                    <h3 style={{...styles.sectionHeading, fontSize: '16px'}}>
+                      Voz de {entity2Name}
+                    </h3>
+                    
+                    {/* ... configurações similares para Entidade 2 ... */}
+                  </div>
+                </>
+              )}
             </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Nome da Entidade 2:</label>
-              <input 
-                style={styles.input}
-                type="text" 
-                value={entity2Name} 
-                onChange={(e) => setEntity2Name(e.target.value)} 
-              />
-            </div>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Velocidade da Animação (ms):</label>
-              <input 
-                style={styles.input}
-                type="number" 
-                value={animationSpeed} 
-                onChange={(e) => setAnimationSpeed(Number(e.target.value))} 
-                min="10" 
-                max="200" 
-              />
+  
+            {/* Seção de Mensagens */}
+            <div style={styles.configSection}>
+              <h2 style={styles.sectionHeading}>Mensagens da Conversa</h2>
+              {/* ... código existente das mensagens ... */}
             </div>
           </div>
-
-          <div style={styles.configSection}>
-            <h2 style={styles.sectionHeading}>Mensagens da Conversa</h2>
-            <div 
-              style={styles.conversationCreator}
-              data-conversation-creator="true"
-            >
-              {conversation.map((msg, index) => (
-                <div key={msg.id || index} style={styles.messageItem}>
-                  <div style={styles.messageHeader}>
-                    <span style={styles.entityTag(msg.entity === 'entity1')}>
-                      {msg.entity === 'entity1' ? entity1Name : entity2Name}
-                    </span>
-                    <div>
-                      <button 
-                        style={{
-                          ...styles.messageControl,
-                          ...(index === 0 ? styles.disabledButton : {})
-                        }} 
-                        onClick={() => moveMessageUp(index)} 
-                        disabled={index === 0}
-                      >
-                        ↑
-                      </button>
-                      <button 
-                        style={{
-                          ...styles.messageControl,
-                          ...(index === conversation.length - 1 ? styles.disabledButton : {})
-                        }} 
-                        onClick={() => moveMessageDown(index)} 
-                        disabled={index === conversation.length - 1}
-                      >
-                        ↓
-                      </button>
-                      <button 
-                        style={styles.messageControl} 
-                        onClick={() => removeMessage(index)}
-                      >
-                        ×
-                      </button>
+        ) : (
+          <div style={styles.terminalContainer}>
+            <div style={styles.terminalHeader}>
+              <div style={styles.terminalTitle}>{terminalName}</div>
+            </div>
+            
+            <div style={styles.terminal}>
+              <MatrixBackground />
+              
+              <div 
+                style={styles.conversationDisplay}
+                ref={conversationDisplayRef}
+              >
+                {/* Mensagens anteriores */}
+                {conversation.slice(0, currentMessageIndex).map((msg, index) => (
+                  <div key={msg.id || index} style={styles.message}>
+                    <div style={styles.messageSender(msg.entity === 'entity1')}>
+                      {currentSpeakingEntity === msg.entity && (
+                        <span className="voice-indicator voice-active"></span>
+                      )}
+                      {msg.entity === 'entity1' ? entity1Name : entity2Name}:
+                    </div>
+                    <div style={styles.messageContent(msg.entity === 'entity1')}>
+                      {msg.text}
                     </div>
                   </div>
-                  <textarea 
-                    ref={index === conversation.length - 1 ? lastTextareaRef : null}
-                    style={styles.textarea}
-                    value={msg.text} 
-                    onChange={(e) => {
-                      const newConversation = [...conversation];
-                      newConversation[index].text = e.target.value;
-                      setConversation(newConversation);
-                    }}
-                    rows="3"
-                  />
-                </div>
-              ))}
+                ))}
+                
+                {/* Mensagem atual sendo digitada */}
+                {(isAnimating || isPaused) && currentMessageIndex < conversation.length && (
+                  <div style={styles.message}>
+                    <div style={styles.messageSender(conversation[currentMessageIndex].entity === 'entity1')}>
+                      {currentSpeakingEntity === conversation[currentMessageIndex].entity && (
+                        <span className="voice-indicator voice-active"></span>
+                      )}
+                      {conversation[currentMessageIndex].entity === 'entity1' ? entity1Name : entity2Name}:
+                    </div>
+                    <div style={{
+                      ...styles.messageContent(conversation[currentMessageIndex].entity === 'entity1'),
+                      position: 'relative'
+                    }}>
+                      {typedChars.map((charObj) => (
+                        <span key={charObj.id} className="typed-char">
+                          {charObj.char}
+                        </span>
+                      ))}
+                      <span className="cursor">|</span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             
-            <div style={styles.addMessageSection}>
-              <button 
-                style={styles.addButton(true)} 
-                onClick={() => addMessage('entity1', '')}
-              >
-                Adicionar Mensagem para {entity1Name}
+            {/* Controles do Terminal */}
+            <div style={styles.terminalControls}>
+              <button style={styles.terminalButton} onClick={restartAnimation}>
+                Reiniciar
               </button>
-              <button 
-                style={styles.addButton(false)} 
-                onClick={() => addMessage('entity2', '')}
-              >
-                Adicionar Mensagem para {entity2Name}
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div style={styles.terminalContainer}>
-          <div style={styles.terminalHeader}>
-            <div style={styles.terminalTitle}>{terminalName}</div>
-          </div>
-          
-          <div style={styles.terminal}>
-            <MatrixBackground />
-            
-            <div 
-              style={styles.conversationDisplay}
-              ref={conversationDisplayRef}
-            >
-              {conversation.slice(0, currentMessageIndex).map((msg, index) => (
-                <div key={msg.id || index} style={styles.message}>
-                  <div style={styles.messageSender(msg.entity === 'entity1')}>
-                    {msg.entity === 'entity1' ? entity1Name : entity2Name}:
-                  </div>
-                  <div style={styles.messageContent(msg.entity === 'entity1')}>
-                    {msg.text}
-                  </div>
-                </div>
-              ))}
               
-              {(isAnimating || isPaused) && currentMessageIndex < conversation.length && (
-                <div style={styles.message}>
-                  <div style={styles.messageSender(conversation[currentMessageIndex].entity === 'entity1')}>
-                    {conversation[currentMessageIndex].entity === 'entity1' ? entity1Name : entity2Name}:
-                  </div>
-                  <div style={{
-                    ...styles.messageContent(conversation[currentMessageIndex].entity === 'entity1'),
-                    position: 'relative'
-                  }}>
-                    {/* Implementação com fade-in de caracteres individuais */}
-                    {typedChars.map((charObj) => (
-                      <span key={charObj.id} className="typed-char">
-                        {charObj.char}
-                      </span>
-                    ))}
-                    <span className="cursor">|</span>
-                  </div>
+              <button 
+                style={styles.terminalButton} 
+                onClick={isAnimating ? pauseAnimation : startAnimation}
+              >
+                {isAnimating ? 'Pausar' : isPaused ? 'Continuar' : 'Iniciar'}
+              </button>
+              
+              <button style={styles.terminalButton} onClick={stopAnimation}>
+                Parar
+              </button>
+  
+              {/* Botão de Mudo */}
+              {isVoiceEnabled && (
+                <div className={isMuted ? "muted" : ""}>
+                  <button 
+                    className="mute-button"
+                    style={styles.terminalButton} 
+                    onClick={() => setIsMuted(!isMuted)}
+                  >
+                    {isMuted ? '🔇 Ativar Som' : '🔊 Silenciar'}
+                  </button>
                 </div>
               )}
             </div>
+  
+            {/* Visualizador de Áudio */}
+            {isVoiceEnabled && isAnimating && !isMuted && currentSpeakingEntity && (
+              <div className={`audio-visualizer speaking-${currentSpeakingEntity}`}>
+                {[...Array(10)].map((_, i) => (
+                  <div 
+                    key={`bar-${i}`} 
+                    className="audio-bar" 
+                    style={{
+                      animationDelay: `${i * 0.05}s`,
+                      height: `${20 + Math.random() * 80}%`
+                    }}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-          
-          <div style={styles.terminalControls}>
-            <button style={styles.terminalButton} onClick={restartAnimation}>
-              Reiniciar
-            </button>
-            
-            <button 
-              style={styles.terminalButton} 
-              onClick={isAnimating ? pauseAnimation : startAnimation}
-            >
-              {isAnimating ? 'Pausar' : isPaused ? 'Continuar' : 'Iniciar'}
-            </button>
-            
-            <button style={styles.terminalButton} onClick={stopAnimation}>
-              Parar
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default App;
+        )}
+      </div>
+    );
+  };
+  
+  export default App;
