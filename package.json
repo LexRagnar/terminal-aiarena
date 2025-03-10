@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "terminal",
+=======
+  "name": "terminal-aiarena",
+>>>>>>> 4db1486789a4541427112292af508df6fe755355
   "version": "0.1.0",
   "private": true,
   "dependencies": {
